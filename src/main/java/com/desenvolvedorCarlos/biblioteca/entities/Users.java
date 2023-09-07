@@ -71,7 +71,7 @@ public class Users {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(user_id);

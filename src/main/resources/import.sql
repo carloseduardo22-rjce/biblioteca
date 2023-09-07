@@ -41,3 +41,14 @@ INSERT INTO table_users (user_id, name, birth_date, address, email) VALUES (defa
 INSERT INTO table_users (user_id, name, birth_date, address, email) VALUES (default, 'Carla Pereira', '1994-06-30', 'Avenida do Rio, 44, Cidade H', 'carla@email.com');
 INSERT INTO table_users (user_id, name, birth_date, address, email) VALUES (default, 'Elena Petrov', '1984-04-18', 'Rua do Bosque, 66, Cidade I', 'elena@email.com');
 INSERT INTO table_users (user_id, name, birth_date, address, email) VALUES (default, 'Alessia Rossi', '1990-08-05', 'Avenida das Estrelas, 77, Cidade J', 'alessia@email.com');
+
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (1, '2023-09-10 11:30:00', '2023-09-20 13:45:00', 1, 1);
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (2, '2023-09-12 14:45:00', '2023-09-22 16:20:00', 2, 2);
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (3, '2023-09-15 13:20:00', '2023-09-25 15:50:00', 3, 3);
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (4, '2023-09-18 12:00:00', '2023-09-28 14:30:00', 4, 4);
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (5, '2023-09-20 10:10:00', '2023-09-30 12:40:00', 5, 5);
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (6, '2023-09-22 08:15:00', '2023-10-02 10:45:00', 6, 6);
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (7, '2023-09-25 10:00:00', '2023-10-05 15:30:00', 7, 7);
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (8, '2023-09-28 16:00:00', '2023-10-08 18:30:00', 8, 8);
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (9, '2023-09-30 09:00:00', '2023-10-10 10:30:00', 9, 9);
+INSERT INTO table_loans (loan_id, loan_date, return_date, user_id, book_id) VALUES (10, '2023-10-02 09:15:00', '2023-10-12 11:45:00', 10, 10);

@@ -3,15 +3,20 @@ package com.desenvolvedorCarlos.biblioteca.entities;
 import java.util.Date;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "table_loans")
-public class Loans {
+public class Loan {
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +24,19 @@ public class Loans {
 	private Date loan_date;
 	private Date return_date;
 	
-	public Loans() {
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private Users user;
+	
+	@OneToOne
+	@JoinColumn(name = "book_id")
+	@JsonIgnore
+	private Book book;
+	
+	public Loan() {
 	}
 
-	public Loans(Integer loan_id, Date loan_date, Date return_date) {
+	public Loan(Integer loan_id, Date loan_date, Date return_date) {
 		this.loan_id = loan_id;
 		this.loan_date = loan_date;
 		this.return_date = return_date;
@@ -52,6 +66,22 @@ public class Loans {
 		this.return_date = return_date;
 	}
 
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(loan_id);
@@ -65,7 +95,7 @@ public class Loans {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Loans other = (Loans) obj;
+		Loan other = (Loan) obj;
 		return Objects.equals(loan_id, other.loan_id);
 	}
 	

@@ -1,5 +1,7 @@
 package com.desenvolvedorCarlos.biblioteca.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -57,6 +59,23 @@ public class PublishingCompany {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(publisher_id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PublishingCompany other = (PublishingCompany) obj;
+		return Objects.equals(publisher_id, other.publisher_id);
 	}
 	
 }

@@ -3,8 +3,6 @@ package com.desenvolvedorCarlos.biblioteca.entities;
 import java.util.Date;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +28,6 @@ public class Loan {
 	
 	@OneToOne
 	@JoinColumn(name = "book_id")
-	@JsonIgnore
 	private Book book;
 	
 	public Loan() {

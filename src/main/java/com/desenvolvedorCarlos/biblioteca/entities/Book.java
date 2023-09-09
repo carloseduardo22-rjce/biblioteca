@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,6 +32,10 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "publisher_id")
 	private PublishingCompany publishingCompany;
+	
+	@OneToOne
+	@JoinColumn(name = "category_id")
+	private CategoryBooks categoryBooks;
 	
 	public Book() {
 	}
@@ -88,6 +93,14 @@ public class Book {
 
 	public void setPublishingCompany(PublishingCompany publishingCompany) {
 		this.publishingCompany = publishingCompany;
+	}
+	
+	public CategoryBooks getCategoryBooks() {
+		return categoryBooks;
+	}
+
+	public void setCategoryBooks(CategoryBooks categoryBooks) {
+		this.categoryBooks = categoryBooks;
 	}
 
 	@Override

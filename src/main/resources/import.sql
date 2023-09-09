@@ -20,16 +20,27 @@ INSERT INTO table_publishing_company (publisher_id, name, address, telephone) VA
 INSERT INTO table_publishing_company (publisher_id, name, address, telephone) VALUES (9, 'Editora dos Livros', 'Rua das Flores 789, Lisboa, Portugal', '+351-21-678-3456');
 INSERT INTO table_publishing_company (publisher_id, name, address, telephone) VALUES (10, 'Ediciones de Libros SL', 'Calle Madrid 234, Madrid, Spain', '+34-91-789-5678');
 
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2020, 1, 15, 1, 'O Senhor dos Anéis');
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2019, 2, 8, 2, 'A Revolução dos Bichos');
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2021, 3, 20, 3, 'Harry Potter e a Pedra Filosofal');
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2018, 4, 12, 4, '1984');
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2022, 5, 5, 5, 'A Dança dos Dragões');
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2017, 6, 10, 6, 'A Culpa é das Estrelas');
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2015, 7, 18, 7, 'Dom Quixote');
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2016, 8, 7, 8, 'Cem Anos de Solidão');
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2014, 9, 14, 9, 'O Pequeno Príncipe');
-INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,publisher_id, title) VALUES (default, 2023, 10, 3, 10, 'Duna');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'Ficção Científica', 'Livros relacionados à ficção científica e fantasia.');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'Romance', 'Livros de romance e drama.');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'Mistério', 'Livros de mistério e suspense.');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'Não Ficção', 'Livros de não ficção, incluindo biografias e ensaios.');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'História', 'Livros relacionados à história e eventos históricos.');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'Fantasia', 'Livros de fantasia e aventura.');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'Autoajuda', 'Livros de autoajuda e desenvolvimento pessoal.');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'Política', 'Livros sobre política e assuntos relacionados.');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'Ciência', 'Livros de ciência e divulgação científica.');
+INSERT INTO table_category_books (category_id, category_name, description) VALUES (default, 'Arte', 'Livros relacionados à arte, pintura e cultura visual.');
+
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2020, 1, 15, 1, 1, 'O Senhor dos Anéis');
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2019, 2, 8, 2, 2, 'A Revolução dos Bichos');
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2021, 3, 20, 3, 3, 'Harry Potter e a Pedra Filosofal');
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2018, 4, 12, 4, 4, '1984');
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2022, 5, 5, 5, 5, 'A Dança dos Dragões');
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2017, 6, 10, 6, 6, 'A Culpa é das Estrelas');
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2015, 7, 18, 7, 7, 'Dom Quixote');
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2016, 8, 7, 8, 8, 'Cem Anos de Solidão');
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2014, 9, 14, 9, 9, 'O Pequeno Príncipe');
+INSERT INTO table_book (book_id, livro_year, author_id, available_quantity,category_id, publisher_id, title) VALUES (default, 2023, 10, 3, 10, 10, 'Duna');
 
 INSERT INTO table_users (user_id, name, birth_date, address, email) VALUES (default, 'João Silva', '1990-05-15', 'Rua das Flores, 123, Cidade A', 'joao@email.com');
 INSERT INTO table_users (user_id, name, birth_date, address, email) VALUES (default, 'Maria Souza', '1985-12-10', 'Avenida Principal, 456, Cidade B', 'maria@email.com');

@@ -3,6 +3,7 @@ package com.desenvolvedorCarlos.biblioteca.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +20,15 @@ public class LoanController {
 	private LoanService loanService;
 	
 	@GetMapping
-	public List<Loan> findAll() {
+	public ResponseEntity<List<Loan>> findAll() {
 		List<Loan> result = loanService.findAll();
-		return result;
+		return ResponseEntity.ok().body(result);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Loan findById(@PathVariable Integer id) {
+	public ResponseEntity<Loan> findById(@PathVariable Integer id) {
 		Loan result = loanService.findById(id);
-		return result;
+		return ResponseEntity.ok().body(result);
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.desenvolvedorCarlos.biblioteca.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.desenvolvedorCarlos.biblioteca.entities.Loan;
 import com.desenvolvedorCarlos.biblioteca.repository.LoanRepository;
+import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 
 @Service
 public class LoanService {
@@ -17,8 +19,8 @@ public class LoanService {
 	
 	@Transactional(readOnly = true)
 	public Loan findById (Integer id) {
-		Loan result = loansRepository.findById(id).get();
-		return result;
+		Optional<Loan> obj = loansRepository.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Loan not found!"));
 	}
 	
 	@Transactional(readOnly = true)

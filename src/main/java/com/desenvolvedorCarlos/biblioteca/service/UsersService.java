@@ -1,6 +1,7 @@
 package com.desenvolvedorCarlos.biblioteca.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.desenvolvedorCarlos.biblioteca.entities.Users;
 import com.desenvolvedorCarlos.biblioteca.repository.UsersRepository;
+import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 
 @Service
 public class UsersService {
@@ -17,8 +19,8 @@ public class UsersService {
 	
 	@Transactional(readOnly = true)
 	public Users findById(Integer id) {
-		Users result = usersRepository.findById(id).get();
-		return result;
+		Optional<Users> obj = usersRepository.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("User not found!"));
 	}
 	
 	@Transactional(readOnly = true)

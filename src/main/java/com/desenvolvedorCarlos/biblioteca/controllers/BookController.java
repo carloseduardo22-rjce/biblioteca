@@ -3,6 +3,7 @@ package com.desenvolvedorCarlos.biblioteca.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +20,15 @@ public class BookController {
 	private BookService bookService;
 	
 	@GetMapping
-	public List<Book> findAll() {
+	public ResponseEntity<List<Book>> findAll() {
 		List<Book> result = bookService.findAll();
-		return result;
+		return ResponseEntity.ok().body(result);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Book findById(@PathVariable Integer id) {
+	public ResponseEntity<Book> findById(@PathVariable Integer id) {
 		Book result = bookService.findById(id);
-		return result;
+		return ResponseEntity.ok().body(result);
 	}
 	
 }

@@ -29,4 +29,8 @@ public class CategoryBooksService {
 		return result;
 	}
 	
+	public CategoryBooks insert(CategoryBooks categoryBooksObj) {
+		return categoryBooksRepository.save(categoryBooksObj);
+	}
+	
 }

@@ -29,4 +29,8 @@ public class BookService {
 		return result;
 	}
 	
+	public Book insert(Book obj) {
+		return bookRepository.save(obj);
+	}
+	
 }

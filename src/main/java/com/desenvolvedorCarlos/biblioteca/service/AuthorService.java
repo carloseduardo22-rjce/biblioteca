@@ -29,4 +29,8 @@ public class AuthorService {
 		return result;
 	}
 	
+	public Author insert(Author obj) {
+		return authorRepository.save(obj);
+	}
+	
 }

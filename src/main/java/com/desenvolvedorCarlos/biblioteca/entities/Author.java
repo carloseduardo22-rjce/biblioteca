@@ -1,12 +1,15 @@
 package com.desenvolvedorCarlos.biblioteca.entities;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +23,9 @@ public class Author {
 	private String name;
 	private Date birth_date;
 	private String country;
+	
+	@OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    private List<Book> books;
 	
 	public Author() {
 	}
@@ -66,6 +72,14 @@ public class Author {
 	@Override
 	public int hashCode() {
 		return Objects.hash(author_id);
+	}
+	
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 
 	@Override

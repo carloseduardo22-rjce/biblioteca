@@ -32,5 +32,10 @@ public class BookService {
 	public Book insert(Book obj) {
 		return bookRepository.save(obj);
 	}
+
+	public void delete(Integer id) {
+		findById(id);
+		bookRepository.deleteById(id);
+	}
 	
 }

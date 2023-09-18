@@ -1,12 +1,12 @@
 package com.desenvolvedorCarlos.biblioteca.controllers;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +21,6 @@ import com.desenvolvedorCarlos.biblioteca.util.CustomResponse;
 @RestController
 @RequestMapping(value = "/Authors")
 public class AuthorController {
-	
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	
 	@Autowired
 	private AuthorService authorService;
@@ -51,6 +49,21 @@ public class AuthorController {
 			Date currentDate = new Date();
 			CustomResponse<Author> errorResponse = new CustomResponse<>(false, 400, "Error when created new Author!", currentDate);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+		}
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<CustomResponse<Author>> deleteById(@PathVariable Integer id) {
+		try {
+			authorService.removeAuthor(id);
+			Date currentDate = new Date();
+			CustomResponse<Author> response = new CustomResponse<>(true, 201, "Author successfully deleted", currentDate);
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+		}
+		catch (Exception e) {
+			Date currentDate = new Date();
+			CustomResponse<Author> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing author", currentDate);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}
 	

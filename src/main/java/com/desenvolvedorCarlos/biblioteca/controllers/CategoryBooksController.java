@@ -1,6 +1,5 @@
 package com.desenvolvedorCarlos.biblioteca.controllers;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +20,6 @@ import com.desenvolvedorCarlos.biblioteca.util.CustomResponse;
 @RestController
 @RequestMapping(value = "/CategoryBooks")
 public class CategoryBooksController {
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	
 	@Autowired
 	private CategoryBooksService categoryBooksService;
@@ -44,14 +41,12 @@ public class CategoryBooksController {
 		try {
 			categoryBooksService.insert(categoryBooksObj);
 			Date currentDate = new Date();
-			String formattedDate = dateFormat.format(currentDate);
-			CustomResponse<CategoryBooks> response = new CustomResponse<>(true, 201, "Categoria de livro criada com sucesso!", currentDate);
+			CustomResponse<CategoryBooks> response = new CustomResponse<>(true, 201, "Book category created sucessfuly!", currentDate);
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			String formattedDate = dateFormat.format(currentDate);
-			CustomResponse<CategoryBooks> errorResponse = new CustomResponse<>(true, 400, "Erro ao criar a categoria de livro", currentDate);
+			CustomResponse<CategoryBooks> errorResponse = new CustomResponse<>(false, 400, "Error when created category of book!", currentDate);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 		}
 	}

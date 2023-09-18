@@ -18,6 +18,7 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer book_id;
+	 
 	private String title;
 	
 	@Column(name = "livro_year")
@@ -39,8 +40,8 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(Integer livro_id, String titulo, Integer year, Integer quantidade_disponivel) {
-		this.book_id = livro_id;
+	public Book(Integer book_id, String titulo, Integer year, Integer quantidade_disponivel) {
+		this.book_id = book_id;
 		this.title = titulo;
 		this.year = year;
 		this.available_quantity = quantidade_disponivel;

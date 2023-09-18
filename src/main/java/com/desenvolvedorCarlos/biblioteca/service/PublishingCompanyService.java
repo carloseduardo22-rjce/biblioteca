@@ -28,5 +28,9 @@ public class PublishingCompanyService {
 		List<PublishingCompany> result = publishingCompanyRepository.findAll();
 		return result;
 	}
+
+	public PublishingCompany insert(PublishingCompany publishingCompanyObj) {
+		return publishingCompanyRepository.save(publishingCompanyObj);
+	}
 	
 }

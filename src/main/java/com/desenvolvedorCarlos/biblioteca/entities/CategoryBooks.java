@@ -16,6 +16,7 @@ public class CategoryBooks {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer category_id;
+	
 	private String category_name;
 	
 	@Column(columnDefinition = "TEXT")

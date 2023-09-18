@@ -29,4 +29,8 @@ public class LoanService {
 		return result;
 	}
 	
+	public Loan insert(Loan loanObj) {
+		return loansRepository.save(loanObj);
+	}
+	
 }

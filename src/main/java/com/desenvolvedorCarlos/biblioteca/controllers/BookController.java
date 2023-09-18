@@ -1,6 +1,5 @@
 package com.desenvolvedorCarlos.biblioteca.controllers;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -15,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.desenvolvedorCarlos.biblioteca.entities.Book;
-import com.desenvolvedorCarlos.biblioteca.entities.CategoryBooks;
 import com.desenvolvedorCarlos.biblioteca.service.BookService;
 import com.desenvolvedorCarlos.biblioteca.util.CustomResponse;
 
 @RestController
 @RequestMapping(value = "/Books")
 public class BookController {
-	
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	
+		
 	@Autowired
 	private BookService bookService;
 	
@@ -40,19 +36,17 @@ public class BookController {
 		return ResponseEntity.ok().body(result);
 	}
 	
-	@PostMapping(value = "/NewCategoryBook")
+	@PostMapping(value = "/NewBook")
 	public ResponseEntity<CustomResponse<Book>> insert(@RequestBody Book bookObj) {
 		try {
 			bookService.insert(bookObj);
 			Date currentDate = new Date();
-			String formattedDate = dateFormat.format(currentDate);
-			CustomResponse<Book> response = new CustomResponse<>(true, 201, "Categoria de livro criada com sucesso!", currentDate);
+			CustomResponse<Book> response = new CustomResponse<>(true, 201, "New book created sucessfuly!", currentDate);
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			String formattedDate = dateFormat.format(currentDate);
-			CustomResponse<Book> errorResponse = new CustomResponse<>(true, 400, "Erro ao criar a categoria de livro", currentDate);
+			CustomResponse<Book> errorResponse = new CustomResponse<>(false, 400, "Error when created new book!", currentDate);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 		}
 	}

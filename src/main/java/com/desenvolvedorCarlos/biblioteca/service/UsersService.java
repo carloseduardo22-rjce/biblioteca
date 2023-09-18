@@ -28,5 +28,9 @@ public class UsersService {
 		List<Users> result = usersRepository.findAll();
 		return result;
 	}
+
+	public Users insert(Users usersObj) {
+		return usersRepository.save(usersObj);
+	}
 	
 }

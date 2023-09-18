@@ -15,6 +15,7 @@ public class PublishingCompany {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer publisher_id;
+	
 	private String name;
 	private String address;
 	private String telephone;

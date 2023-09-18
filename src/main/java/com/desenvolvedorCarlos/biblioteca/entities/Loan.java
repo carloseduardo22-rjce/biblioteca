@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +18,7 @@ public class Loan {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer loan_id;
+	
 	private Date loan_date;
 	private Date return_date;
 	
@@ -26,7 +26,7 @@ public class Loan {
 	@JoinColumn(name = "user_id")
 	private Users user;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "book_id")
 	private Book book;
 	

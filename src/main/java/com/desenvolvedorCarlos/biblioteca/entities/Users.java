@@ -16,6 +16,7 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer user_id;
+	
 	private String name;
 	private Date birth_Date;
 	private String address;

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.desenvolvedorCarlos.biblioteca.entities.Book;
+import com.desenvolvedorCarlos.biblioteca.entities.Loan;
 import com.desenvolvedorCarlos.biblioteca.repository.BookRepository;
+import com.desenvolvedorCarlos.biblioteca.repository.LoanRepository;
 import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 
 @Service
@@ -16,6 +18,9 @@ public class BookService {
 
 	@Autowired
 	private BookRepository bookRepository;
+	
+	@Autowired
+	private LoanRepository loanRepository;
 	
 	@Transactional(readOnly = true)
 	public Book findById(Integer id) {
@@ -36,6 +41,20 @@ public class BookService {
 	public void delete(Integer id) {
 		findById(id);
 		bookRepository.deleteById(id);
+	}
+	
+	public void removeBook(Integer bookId) {
+		Optional<Book> bookOptional = bookRepository.findById(bookId);
+		
+		if (bookOptional.isPresent()) {
+			Book book = bookOptional.get();
+			List<Loan> loans = loanRepository.findByBook(book);
+			for(Loan loan : loans) {
+				loan.setBook(null);
+			}
+			bookRepository.delete(book);
+		}
+		
 	}
 	
 }

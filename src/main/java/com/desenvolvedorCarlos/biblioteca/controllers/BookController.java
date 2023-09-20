@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +49,21 @@ public class BookController {
 			Date currentDate = new Date();
 			CustomResponse<Book> errorResponse = new CustomResponse<>(false, 400, "Error when created new book!", currentDate);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+		}
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<CustomResponse<Book>> deleteById(@PathVariable Integer id) {
+		try {
+			bookService.removeBook(id);
+			Date currentDate = new Date();
+			CustomResponse<Book> response = new CustomResponse<>(true, 201, "Author successfully deleted", currentDate);
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+		}
+		catch (Exception e) {
+			Date currentDate = new Date();
+			CustomResponse<Book> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing author", currentDate);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}
 	

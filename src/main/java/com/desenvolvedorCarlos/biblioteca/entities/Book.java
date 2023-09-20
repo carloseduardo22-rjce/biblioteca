@@ -108,6 +108,14 @@ public class Book {
 	public void setCategoryBooks(CategoryBooks categoryBooks) {
 		this.categoryBooks = categoryBooks;
 	}
+	
+	public List<Loan> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(List<Loan> loans) {
+		this.loans = loans;
+	}
 
 	@Override
 	public int hashCode() {

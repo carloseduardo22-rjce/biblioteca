@@ -1,11 +1,14 @@
 package com.desenvolvedorCarlos.biblioteca.entities;
 
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +22,9 @@ public class PublishingCompany {
 	private String name;
 	private String address;
 	private String telephone;
+	
+	@OneToMany(mappedBy = "publishingCompany", cascade = CascadeType.REMOVE)
+	List<Book> books;
 	
 	public PublishingCompany() {
 	}
@@ -60,6 +66,14 @@ public class PublishingCompany {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 
 	@Override

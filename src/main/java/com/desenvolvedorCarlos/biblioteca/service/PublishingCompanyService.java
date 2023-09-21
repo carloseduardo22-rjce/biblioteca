@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.desenvolvedorCarlos.biblioteca.entities.Book;
 import com.desenvolvedorCarlos.biblioteca.entities.PublishingCompany;
+import com.desenvolvedorCarlos.biblioteca.repository.BookRepository;
 import com.desenvolvedorCarlos.biblioteca.repository.PublishingCompanyRepository;
 import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 
@@ -16,6 +18,9 @@ public class PublishingCompanyService {
 
 	@Autowired
 	private PublishingCompanyRepository publishingCompanyRepository;
+	
+	@Autowired
+	private BookRepository bookRepository;
 	
 	@Transactional(readOnly = true)
 	public PublishingCompany findById(Integer id) {
@@ -31,6 +36,19 @@ public class PublishingCompanyService {
 
 	public PublishingCompany insert(PublishingCompany publishingCompanyObj) {
 		return publishingCompanyRepository.save(publishingCompanyObj);
+	}
+
+	public void removePublishingCompany(Integer id) {
+		Optional<PublishingCompany> publishingCompanyOptional = publishingCompanyRepository.findById(id);
+		
+		if (publishingCompanyOptional.isPresent()) {
+			PublishingCompany publishingCompany = publishingCompanyOptional.get();
+			List<Book> books = bookRepository.findByPublishingCompany(publishingCompany);
+			for (Book book : books) {
+				book.setPublishingCompany(null);
+			}
+			publishingCompanyRepository.delete(publishingCompany);
+		}
 	}
 	
 }

@@ -1,12 +1,15 @@
 package com.desenvolvedorCarlos.biblioteca.entities;
 
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +24,9 @@ public class CategoryBooks {
 	
 	@Column(columnDefinition = "TEXT")
 	private String description;
+	
+	@OneToMany(mappedBy = "categoryBooks", cascade = CascadeType.REMOVE)
+	List<Book> books;
 	
 	public CategoryBooks() {
 	}
@@ -53,6 +59,14 @@ public class CategoryBooks {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 
 	@Override

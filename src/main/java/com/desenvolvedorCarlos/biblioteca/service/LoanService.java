@@ -32,5 +32,16 @@ public class LoanService {
 	public Loan insert(Loan loanObj) {
 		return loansRepository.save(loanObj);
 	}
+
+	public void removeLoan(Integer id) {
+		Optional<Loan> loanOptional = loansRepository.findById(id);
+		
+		if (loanOptional.isPresent()) {
+			Loan loan = loanOptional.get();
+			loan.setBook(null);
+			loan.setUser(null);
+			loansRepository.delete(loan);
+		}
+	}
 	
 }

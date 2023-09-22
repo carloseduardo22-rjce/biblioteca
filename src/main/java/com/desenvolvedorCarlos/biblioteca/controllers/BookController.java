@@ -57,12 +57,12 @@ public class BookController {
 		try {
 			bookService.removeBook(id);
 			Date currentDate = new Date();
-			CustomResponse<Book> response = new CustomResponse<>(true, 201, "Author successfully deleted", currentDate);
+			CustomResponse<Book> response = new CustomResponse<>(true, 201, "Book successfully deleted", currentDate);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<Book> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing author", currentDate);
+			CustomResponse<Book> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing Book", currentDate);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}

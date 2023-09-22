@@ -1,12 +1,15 @@
 package com.desenvolvedorCarlos.biblioteca.entities;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +25,9 @@ public class Users {
 	private String address;
 	private String email;
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+	private List<Loan> loans;
+	
 	public Users() {
 	}
 
@@ -31,6 +37,14 @@ public class Users {
 		this.birth_Date = birth_Date;
 		this.address = address;
 		this.email = email;
+	}
+	
+	public Integer getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public Integer getUsuário_id() {
@@ -76,6 +90,14 @@ public class Users {
 	@Override
 	public int hashCode() {
 		return Objects.hash(user_id);
+	}
+	
+	public List<Loan> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(List<Loan> loans) {
+		this.loans = loans;
 	}
 
 	@Override

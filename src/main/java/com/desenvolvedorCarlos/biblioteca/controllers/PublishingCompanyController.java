@@ -42,7 +42,7 @@ public class PublishingCompanyController {
 		try {
 			publishingCompanyService.insert(publishingCompanyObj);
 			Date currentDate = new Date();
-			CustomResponse<PublishingCompany> response = new CustomResponse<>(true, 201, "New PublishingCompany registered!", currentDate);
+			CustomResponse<PublishingCompany> response = new CustomResponse<>(true, 201, "New PublishingCompany created!", currentDate);
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		}
 		catch (Exception e) {
@@ -57,12 +57,12 @@ public class PublishingCompanyController {
 		try {
 			publishingCompanyService.removePublishingCompany(id);
 			Date currentDate = new Date();
-			CustomResponse<PublishingCompany> response = new CustomResponse<>(true, 201, "Author successfully deleted", currentDate);
+			CustomResponse<PublishingCompany> response = new CustomResponse<>(true, 201, "Publishing successfully deleted", currentDate);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<PublishingCompany> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing author", currentDate);
+			CustomResponse<PublishingCompany> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing PublishingCompany", currentDate);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}

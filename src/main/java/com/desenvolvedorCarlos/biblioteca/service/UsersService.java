@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.desenvolvedorCarlos.biblioteca.entities.Loan;
 import com.desenvolvedorCarlos.biblioteca.entities.Users;
+import com.desenvolvedorCarlos.biblioteca.repository.LoanRepository;
 import com.desenvolvedorCarlos.biblioteca.repository.UsersRepository;
 import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 
@@ -16,6 +18,9 @@ public class UsersService {
 
 	@Autowired
 	private UsersRepository usersRepository;
+	
+	@Autowired
+	private LoanRepository loanRepository;
 	
 	@Transactional(readOnly = true)
 	public Users findById(Integer id) {
@@ -31,6 +36,19 @@ public class UsersService {
 
 	public Users insert(Users usersObj) {
 		return usersRepository.save(usersObj);
+	}
+
+	public void removeUser(Integer id) {
+		Optional<Users> userOptional = usersRepository.findById(id);
+		
+		if (userOptional.isPresent()) {
+			Users user = userOptional.get();
+			List<Loan> loans = loanRepository.findByUser(user);
+			for (Loan loan : loans) {
+				loan.setUser(null);
+			}
+			usersRepository.delete(user);
+		}
 	}
 	
 }

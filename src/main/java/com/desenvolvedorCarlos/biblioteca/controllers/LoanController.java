@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,6 +65,21 @@ public class LoanController {
 			Date currentDate = new Date();
 			CustomResponse<Loan> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing Loan", currentDate);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+		}
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<CustomResponse<Loan>> update (@PathVariable Integer id, @RequestBody Loan loan) {
+		try { 
+			loanService.update(id, loan);
+			Date currentDate = new Date();
+			CustomResponse<Loan> response = new CustomResponse<>(true, 201, "Loan updated sucessfuly", currentDate);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		}
+		catch (Exception e) {
+			Date currentDate = new Date();
+			CustomResponse<Loan> errorResponse = new CustomResponse<>(false, 400, "Loan updated failed", currentDate);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 		}
 	}
 	

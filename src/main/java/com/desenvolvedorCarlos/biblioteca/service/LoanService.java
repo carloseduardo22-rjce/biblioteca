@@ -43,5 +43,19 @@ public class LoanService {
 			loansRepository.delete(loan);
 		}
 	}
+
+	public void update(Integer id, Loan loan) {
+		Optional<Loan> loanOptional = loansRepository.findById(id);
+		
+		if (loanOptional.isPresent()) {
+			Loan loanExisting = loanOptional.get();
+			loanExisting.setLoan_date(loan.getLoan_date());
+			loanExisting.setReturn_date(loan.getReturn_date());
+			loanExisting.setUser(loan.getUser());
+			loanExisting.setBook(loan.getBook());
+			loansRepository.save(loanExisting);
+		}
+
+	}
 	
 }

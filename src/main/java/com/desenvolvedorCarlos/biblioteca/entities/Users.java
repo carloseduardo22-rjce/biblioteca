@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class Users {
 	private String address;
 	private String email;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Loan> loans;
 	

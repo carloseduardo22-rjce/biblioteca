@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +64,21 @@ public class UsersController {
 		catch (Exception e) {
 			Date currentDate = new Date();
 			CustomResponse<Users> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing User", currentDate);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+		}
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<CustomResponse<Users>> update (@PathVariable Integer id, @RequestBody Users users) {
+		try {
+			usersService.update(id, users);
+			Date currentDate = new Date();
+			CustomResponse<Users> response = new CustomResponse<>(true, 201, "User update sucessfuly", currentDate);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		}
+		catch (Exception e) {
+			Date currentDate = new Date();
+			CustomResponse<Users> errorResponse = new CustomResponse<>(false, 400, "User update failed", currentDate);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 		}
 	}

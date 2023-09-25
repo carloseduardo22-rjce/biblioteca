@@ -50,5 +50,19 @@ public class UsersService {
 			usersRepository.delete(user);
 		}
 	}
+
+	public void update(Integer id, Users user) {
+		Optional<Users> userOptional = usersRepository.findById(id);
+		
+		if (userOptional.isPresent()) {
+			Users userExisting = userOptional.get();
+			userExisting.setName(user.getName());
+			userExisting.setBirth_Date(user.getBirth_Date());
+			userExisting.setAddress(user.getAddress());
+			userExisting.setEmail(user.getEmail());
+			usersRepository.save(user);
+		}
+	
+	}
 	
 }

@@ -51,5 +51,18 @@ public class CategoryBooksService {
 		}
 		
 	}
+
+	public void update(Integer id, CategoryBooks categoryBooks) {
+		Optional<CategoryBooks> categoryBookOptional = categoryBooksRepository.findById(id);
+		
+		if (categoryBookOptional.isPresent()) {
+			CategoryBooks categoryBookExisting = categoryBookOptional.get();
+			categoryBookExisting.setCategory_name(categoryBooks.getCategory_name());
+			categoryBookExisting.setDescription(categoryBooks.getDescription());
+			categoryBookExisting.setBooks(categoryBooks.getBooks());
+			categoryBooksRepository.save(categoryBookExisting);
+		}
+	
+	}
 	
 }

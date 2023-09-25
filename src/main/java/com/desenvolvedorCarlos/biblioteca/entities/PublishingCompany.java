@@ -3,6 +3,8 @@ package com.desenvolvedorCarlos.biblioteca.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class PublishingCompany {
 	private String address;
 	private String telephone;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "publishingCompany", cascade = CascadeType.REMOVE)
 	List<Book> books;
 	

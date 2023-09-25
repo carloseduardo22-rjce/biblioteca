@@ -51,5 +51,18 @@ public class AuthorService {
 		}
 		
 	}
+
+	public void update(Integer id, Author author) {
+		Optional<Author> authorOptional = authorRepository.findById(id);
+		
+		if (authorOptional.isPresent()) {
+			Author authorExisting = authorOptional.get();
+			authorExisting.setName(author.getName());
+			authorExisting.setBirth_date(author.getBirth_date());
+			authorExisting.setCountry(author.getCountry());
+			authorRepository.save(authorExisting);
+		}
+	
+	}
 	
 }

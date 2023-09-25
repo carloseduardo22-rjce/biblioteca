@@ -3,6 +3,8 @@ package com.desenvolvedorCarlos.biblioteca.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,6 +27,7 @@ public class CategoryBooks {
 	@Column(columnDefinition = "TEXT")
 	private String description;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "categoryBooks", cascade = CascadeType.REMOVE)
 	List<Book> books;
 	

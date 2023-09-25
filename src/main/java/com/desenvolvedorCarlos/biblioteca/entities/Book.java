@@ -3,6 +3,8 @@ package com.desenvolvedorCarlos.biblioteca.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,6 +42,7 @@ public class Book {
 	@JoinColumn(name = "category_id")
 	private CategoryBooks categoryBooks;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<Loan> loans;
 	

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,7 @@ public class Author {
 	private Date birth_date;
 	private String country;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Book> books;
 	

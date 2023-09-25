@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,6 +65,21 @@ public class AuthorController {
 			Date currentDate = new Date();
 			CustomResponse<Author> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing author", currentDate);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+		}
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<CustomResponse<Author>> update (@PathVariable Integer id, @RequestBody Author author) {
+		try {
+			authorService.update(id, author);
+			Date currentDate = new Date();
+			CustomResponse<Author> response = new CustomResponse<>(true, 201, "Author updated sucessufuly!", currentDate);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		}
+		catch (Exception e) {
+			Date currentDate = new Date();
+			CustomResponse<Author> errorResponse = new CustomResponse<>(false, 400, "Author updated failed!", currentDate);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 		}
 	}
 	

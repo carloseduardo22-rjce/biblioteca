@@ -50,5 +50,19 @@ public class PublishingCompanyService {
 			publishingCompanyRepository.delete(publishingCompany);
 		}
 	}
+
+	public void update(Integer id, PublishingCompany publishingCompany) {
+		Optional<PublishingCompany> publishingCompanyOptional = publishingCompanyRepository.findById(id);
+	
+		if (publishingCompanyOptional.isPresent()) {
+			PublishingCompany publishingCompanyExisting = publishingCompanyOptional.get();
+			publishingCompanyExisting.setName(publishingCompany.getName());
+			publishingCompanyExisting.setAddress(publishingCompany.getAddress());
+			publishingCompanyExisting.setTelephone(publishingCompany.getTelephone());
+			publishingCompanyExisting.setBooks(publishingCompany.getBooks());
+			publishingCompanyRepository.save(publishingCompanyExisting);
+		}
+	
+	}
 	
 }

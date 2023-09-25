@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,6 +65,21 @@ public class BookController {
 			Date currentDate = new Date();
 			CustomResponse<Book> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing Book", currentDate);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+		}
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<CustomResponse<Book>> update (@PathVariable Integer id, @RequestBody Book book) {
+		try {
+			bookService.update(id, book);
+			Date currentDate = new Date();
+			CustomResponse<Book> response = new CustomResponse<>(true, 201, "Book updated sucessfuly!", currentDate);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		}
+		catch (Exception e) {
+			Date currentDate = new Date();
+			CustomResponse<Book> errorResponse = new CustomResponse<>(false, 400, "Book update failed!", currentDate);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 		}
 	}
 	

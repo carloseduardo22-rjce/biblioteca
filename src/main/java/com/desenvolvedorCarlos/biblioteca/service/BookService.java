@@ -56,5 +56,20 @@ public class BookService {
 		}
 		
 	}
+
+	public void update(Integer id, Book book) {
+		Optional<Book> bookOptional = bookRepository.findById(id);
+		
+		if (bookOptional.isPresent()) {
+			Book bookExisting = bookOptional.get();
+			bookExisting.setTitle(book.getTitle());
+			bookExisting.setYear(book.getYear());
+			bookExisting.setAvailable_quantity(book.getAvailable_quantity());
+			bookExisting.setAuthor(book.getAuthor());
+			bookExisting.setPublishingCompany(book.getPublishingCompany());
+			bookExisting.setCategoryBooks(book.getCategoryBooks());
+			bookRepository.save(bookExisting);
+		}
+	}
 	
 }

@@ -57,13 +57,13 @@ public class AuthorController {
 	public ResponseEntity<CustomResponse<Author>> deleteById(@PathVariable Integer id) {
 		try {
 			authorService.removeAuthor(id);
-			Date currentDate = new Date();
-			CustomResponse<Author> response = new CustomResponse<>(true, 201, "Author successfully deleted", currentDate);
+			Date currentDate = new Date(); 	
+			CustomResponse<Author> response = new CustomResponse<>(true, 204, "Author successfully deleted", currentDate);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<Author> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing author", currentDate);
+			CustomResponse<Author> errorResponse = new CustomResponse<>(false, 404, "Error when trying to delete non-existing author", currentDate);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}

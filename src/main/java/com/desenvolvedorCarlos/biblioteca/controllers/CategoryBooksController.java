@@ -58,12 +58,12 @@ public class CategoryBooksController {
 		try {
 			categoryBooksService.removeCategory(id);
 			Date currentDate = new Date();
-			CustomResponse<CategoryBooks> response = new CustomResponse<>(true, 201, "CategoryBook successfully deleted", currentDate);
+			CustomResponse<CategoryBooks> response = new CustomResponse<>(true, 204, "CategoryBook successfully deleted", currentDate);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<CategoryBooks> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing CategoryBook", currentDate);
+			CustomResponse<CategoryBooks> errorResponse = new CustomResponse<>(false, 404, "Error when trying to delete non-existing CategoryBook", currentDate);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}

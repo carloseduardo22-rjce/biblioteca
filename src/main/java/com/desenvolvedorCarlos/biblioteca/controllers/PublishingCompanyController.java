@@ -58,12 +58,12 @@ public class PublishingCompanyController {
 		try {
 			publishingCompanyService.removePublishingCompany(id);
 			Date currentDate = new Date();
-			CustomResponse<PublishingCompany> response = new CustomResponse<>(true, 201, "Publishing successfully deleted", currentDate);
+			CustomResponse<PublishingCompany> response = new CustomResponse<>(true, 204, "Publishing successfully deleted", currentDate);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<PublishingCompany> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing PublishingCompany", currentDate);
+			CustomResponse<PublishingCompany> errorResponse = new CustomResponse<>(false, 404, "Error when trying to delete non-existing PublishingCompany", currentDate);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}

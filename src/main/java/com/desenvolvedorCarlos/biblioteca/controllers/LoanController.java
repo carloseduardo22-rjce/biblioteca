@@ -58,12 +58,12 @@ public class LoanController {
 		try {
 			loanService.removeLoan(id);
 			Date currentDate = new Date();
-			CustomResponse<Loan> response = new CustomResponse<>(true, 201, "Loan sucessfully deleted", currentDate);
+			CustomResponse<Loan> response = new CustomResponse<>(true, 204, "Loan sucessfully deleted", currentDate);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<Loan> errorResponse = new CustomResponse<>(false, 400, "Error when trying to delete non-existing Loan", currentDate);
+			CustomResponse<Loan> errorResponse = new CustomResponse<>(false, 404, "Error when trying to delete non-existing Loan", currentDate);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}

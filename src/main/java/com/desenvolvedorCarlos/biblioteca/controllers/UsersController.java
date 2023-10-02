@@ -58,7 +58,7 @@ public class UsersController {
 		try {
 			usersService.removeUser(id);
 			Date currentDate = new Date();
-			CustomResponse<Users> response = new CustomResponse<>(true, 201, "User sucessfully deleted", currentDate);
+			CustomResponse<Users> response = new CustomResponse<>(true, 204, "User sucessfully deleted", currentDate);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 		}
 		catch (Exception e) {

@@ -41,7 +41,10 @@ public class CategoryBooksService {
 	public void removeCategory(Integer categoryId) {
 		Optional<CategoryBooks> categoryOptional = categoryBooksRepository.findById(categoryId);
 		
-		if (categoryOptional.isPresent()) {
+		if (!categoryOptional.isPresent()) {
+			throw new ObjectNotFoundException("CategoryBooks object not found!");
+		}
+		else {
 			CategoryBooks categoryBook = categoryOptional.get();
 			List<Book> books = bookRepository.findByCategoryBooks(categoryBook);
 			for(Book book : books) {

@@ -36,7 +36,10 @@ public class LoanService {
 	public void removeLoan(Integer id) {
 		Optional<Loan> loanOptional = loansRepository.findById(id);
 		
-		if (loanOptional.isPresent()) {
+		if (!loanOptional.isPresent()) {
+			throw new ObjectNotFoundException("Loan object not found!");
+		}
+		else {
 			Loan loan = loanOptional.get();
 			loan.setBook(null);
 			loan.setUser(null);

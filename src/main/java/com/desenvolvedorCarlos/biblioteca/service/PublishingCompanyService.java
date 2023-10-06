@@ -41,7 +41,10 @@ public class PublishingCompanyService {
 	public void removePublishingCompany(Integer id) {
 		Optional<PublishingCompany> publishingCompanyOptional = publishingCompanyRepository.findById(id);
 		
-		if (publishingCompanyOptional.isPresent()) {
+		if (!publishingCompanyOptional.isPresent()) {
+			throw new ObjectNotFoundException("Publishing Company object not found!");
+		}
+		else {
 			PublishingCompany publishingCompany = publishingCompanyOptional.get();
 			List<Book> books = bookRepository.findByPublishingCompany(publishingCompany);
 			for (Book book : books) {

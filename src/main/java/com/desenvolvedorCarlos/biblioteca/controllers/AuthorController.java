@@ -56,7 +56,7 @@ public class AuthorController {
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<CustomResponse<Author>> deleteById(@PathVariable Integer id) {
 		try {
-			authorService.removeAuthor(id);
+			authorService.remove(id);
 			Date currentDate = new Date(); 	
 			CustomResponse<Author> response = new CustomResponse<>(true, 204, "Author successfully deleted", currentDate);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);

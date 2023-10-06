@@ -41,7 +41,10 @@ public class UsersService {
 	public void removeUser(Integer id) {
 		Optional<Users> userOptional = usersRepository.findById(id);
 		
-		if (userOptional.isPresent()) {
+		if (!userOptional.isPresent()) {
+			throw new ObjectNotFoundException("User object not found!");
+		}
+		else {
 			Users user = userOptional.get();
 			List<Loan> loans = loanRepository.findByUser(user);
 			for (Loan loan : loans) {
@@ -49,6 +52,7 @@ public class UsersService {
 			}
 			usersRepository.delete(user);
 		}
+		
 	}
 
 	public void update(Integer id, Users user) {
@@ -60,7 +64,7 @@ public class UsersService {
 			userExisting.setBirth_Date(user.getBirth_Date());
 			userExisting.setAddress(user.getAddress());
 			userExisting.setEmail(user.getEmail());
-			usersRepository.save(user);
+			usersRepository.save(userExisting);
 		}
 	
 	}

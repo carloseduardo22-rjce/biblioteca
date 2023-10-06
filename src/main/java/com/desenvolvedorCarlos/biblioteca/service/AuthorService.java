@@ -38,10 +38,13 @@ public class AuthorService {
 		return authorRepository.save(obj);
 	}
 	
-	public void removeAuthor(Integer authorId) {
+	public void remove(Integer authorId) {
 		Optional<Author> authorOptional = authorRepository.findById(authorId);
 		
-		if (authorOptional.isPresent()) {
+		if (!authorOptional.isPresent()) {
+			throw new ObjectNotFoundException("Author object not found!");
+		}
+		else {
 			Author author = authorOptional.get();
 			List<Book> books = bookRepository.findByAuthor(author);
 			for(Book book : books) {
@@ -62,7 +65,7 @@ public class AuthorService {
 			authorExisting.setCountry(author.getCountry());
 			authorRepository.save(authorExisting);
 		}
-	
+
 	}
 	
 }

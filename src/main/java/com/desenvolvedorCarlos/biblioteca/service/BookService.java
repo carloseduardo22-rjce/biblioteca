@@ -46,7 +46,10 @@ public class BookService {
 	public void removeBook(Integer bookId) {
 		Optional<Book> bookOptional = bookRepository.findById(bookId);
 		
-		if (bookOptional.isPresent()) {
+		if (!bookOptional.isPresent()) {
+			throw new ObjectNotFoundException("Book object not found!");
+		}
+		else {
 			Book book = bookOptional.get();
 			List<Loan> loans = loanRepository.findByBook(book);
 			for(Loan loan : loans) {

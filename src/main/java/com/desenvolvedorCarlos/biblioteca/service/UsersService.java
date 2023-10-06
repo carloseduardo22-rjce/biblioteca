@@ -58,7 +58,10 @@ public class UsersService {
 	public void update(Integer id, Users user) {
 		Optional<Users> userOptional = usersRepository.findById(id);
 		
-		if (userOptional.isPresent()) {
+		if (!userOptional.isPresent()) {
+			throw new ObjectNotFoundException("User object not found!");
+		}
+		else {
 			Users userExisting = userOptional.get();
 			userExisting.setName(user.getName());
 			userExisting.setBirth_Date(user.getBirth_Date());

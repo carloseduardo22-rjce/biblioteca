@@ -78,8 +78,8 @@ public class PublishingCompanyController {
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<PublishingCompany> errorResponse = new CustomResponse<>(false, 400, "Publishing Company updated failed!", currentDate);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+			CustomResponse<PublishingCompany> errorResponse = new CustomResponse<>(false, 404, "Publishing Company updated failed!", currentDate);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}
 	

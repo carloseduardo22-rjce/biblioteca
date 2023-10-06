@@ -78,8 +78,8 @@ public class BookController {
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<Book> errorResponse = new CustomResponse<>(false, 400, "Book update failed!", currentDate);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+			CustomResponse<Book> errorResponse = new CustomResponse<>(false, 404, "Book update failed!", currentDate);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}
 	

@@ -78,8 +78,8 @@ public class LoanController {
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<Loan> errorResponse = new CustomResponse<>(false, 400, "Loan updated failed", currentDate);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+			CustomResponse<Loan> errorResponse = new CustomResponse<>(false, 404, "Loan updated failed", currentDate);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}
 	

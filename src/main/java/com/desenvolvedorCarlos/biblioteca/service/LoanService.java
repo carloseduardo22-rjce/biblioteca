@@ -50,7 +50,10 @@ public class LoanService {
 	public void update(Integer id, Loan loan) {
 		Optional<Loan> loanOptional = loansRepository.findById(id);
 		
-		if (loanOptional.isPresent()) {
+		if (!loanOptional.isPresent()) {
+			throw new ObjectNotFoundException("Loan object not found!");
+		}
+		else {
 			Loan loanExisting = loanOptional.get();
 			loanExisting.setLoan_date(loan.getLoan_date());
 			loanExisting.setReturn_date(loan.getReturn_date());

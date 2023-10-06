@@ -58,7 +58,10 @@ public class CategoryBooksService {
 	public void update(Integer id, CategoryBooks categoryBooks) {
 		Optional<CategoryBooks> categoryBookOptional = categoryBooksRepository.findById(id);
 		
-		if (categoryBookOptional.isPresent()) {
+		if (!categoryBookOptional.isPresent()) {
+			throw new ObjectNotFoundException("Category object not found!");
+		}
+		else {
 			CategoryBooks categoryBookExisting = categoryBookOptional.get();
 			categoryBookExisting.setCategory_name(categoryBooks.getCategory_name());
 			categoryBookExisting.setDescription(categoryBooks.getDescription());

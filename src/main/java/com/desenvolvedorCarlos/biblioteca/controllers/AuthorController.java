@@ -78,8 +78,8 @@ public class AuthorController {
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<Author> errorResponse = new CustomResponse<>(false, 400, "Author updated failed!", currentDate);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+			CustomResponse<Author> errorResponse = new CustomResponse<>(false, 404, "Author updated failed!", currentDate);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}
 	

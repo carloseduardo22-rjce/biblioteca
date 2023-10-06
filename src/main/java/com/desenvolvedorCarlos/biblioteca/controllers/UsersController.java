@@ -78,8 +78,8 @@ public class UsersController {
 		}
 		catch (Exception e) {
 			Date currentDate = new Date();
-			CustomResponse<Users> errorResponse = new CustomResponse<>(false, 400, "User update failed", currentDate);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+			CustomResponse<Users> errorResponse = new CustomResponse<>(false, 404, "User update failed", currentDate);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 		}
 	}
 	

@@ -57,7 +57,10 @@ public class PublishingCompanyService {
 	public void update(Integer id, PublishingCompany publishingCompany) {
 		Optional<PublishingCompany> publishingCompanyOptional = publishingCompanyRepository.findById(id);
 	
-		if (publishingCompanyOptional.isPresent()) {
+		if (!publishingCompanyOptional.isPresent()) {
+			throw new ObjectNotFoundException("Publishing Company object not found!");
+		}
+		else {
 			PublishingCompany publishingCompanyExisting = publishingCompanyOptional.get();
 			publishingCompanyExisting.setName(publishingCompany.getName());
 			publishingCompanyExisting.setAddress(publishingCompany.getAddress());

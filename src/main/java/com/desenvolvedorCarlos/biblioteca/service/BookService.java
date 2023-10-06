@@ -63,7 +63,10 @@ public class BookService {
 	public void update(Integer id, Book book) {
 		Optional<Book> bookOptional = bookRepository.findById(id);
 		
-		if (bookOptional.isPresent()) {
+		if (!bookOptional.isPresent()) {
+			throw new ObjectNotFoundException("Object not found!");
+		}
+		else {
 			Book bookExisting = bookOptional.get();
 			bookExisting.setTitle(book.getTitle());
 			bookExisting.setYear(book.getYear());

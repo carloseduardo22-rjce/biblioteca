@@ -58,7 +58,10 @@ public class AuthorService {
 	public void update(Integer id, Author author) {
 		Optional<Author> authorOptional = authorRepository.findById(id);
 		
-		if (authorOptional.isPresent()) {
+		if (!authorOptional.isPresent()) {
+			throw new ObjectNotFoundException("Author object not found!");
+		}
+		else {
 			Author authorExisting = authorOptional.get();
 			authorExisting.setName(author.getName());
 			authorExisting.setBirth_date(author.getBirth_date());

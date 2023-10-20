@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desenvolvedorCarlos.biblioteca.entities.PublishingCompany;
 import com.desenvolvedorCarlos.biblioteca.service.PublishingCompanyService;
+import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 import com.desenvolvedorCarlos.biblioteca.util.CustomResponse;
 
 @RestController
@@ -28,14 +29,24 @@ public class PublishingCompanyController {
 	
 	@GetMapping
 	public 	ResponseEntity<List<PublishingCompany>> findAll() {
-		List<PublishingCompany> result = publishingCompanyService.findAll();
-		return ResponseEntity.ok().body(result);
+		try {
+			List<PublishingCompany> result = publishingCompanyService.findAll();
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning PublishingCompanys objects!");
+		}
 	}
 	
 	@GetMapping(value = "/{id}")
 	public PublishingCompany findById(@PathVariable Integer id) {
-		PublishingCompany result = publishingCompanyService.findById(id);
-		return result;
+		try {
+			PublishingCompany result = publishingCompanyService.findById(id);
+			return result;
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning PublishingCompany object!");
+		}
 	}
 	
 	@PostMapping(value = "/NewPublishingCompany")

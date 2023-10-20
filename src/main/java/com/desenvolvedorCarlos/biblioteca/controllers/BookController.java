@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desenvolvedorCarlos.biblioteca.entities.Book;
 import com.desenvolvedorCarlos.biblioteca.service.BookService;
+import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 import com.desenvolvedorCarlos.biblioteca.util.CustomResponse;
 
 @RestController
@@ -28,14 +29,24 @@ public class BookController {
 	
 	@GetMapping
 	public ResponseEntity<List<Book>> findAll() {
-		List<Book> result = bookService.findAll();
-		return ResponseEntity.ok().body(result);
+		try {
+			List<Book> result = bookService.findAll();
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning books objects!");
+		}
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Book> findById(@PathVariable Integer id) {
-		Book result = bookService.findById(id);
-		return ResponseEntity.ok().body(result);
+		try {
+			Book result = bookService.findById(id);
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning book object!");
+		}
 	}
 	
 	@PostMapping(value = "/NewBook")

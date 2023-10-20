@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desenvolvedorCarlos.biblioteca.entities.Users;
 import com.desenvolvedorCarlos.biblioteca.service.UsersService;
+import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 import com.desenvolvedorCarlos.biblioteca.util.CustomResponse;
 
 @RestController
@@ -28,14 +29,24 @@ public class UsersController {
 	
 	@GetMapping
 	public 	ResponseEntity<List<Users>> findAll(){
-		List<Users> result = usersService.findAll();
-		return ResponseEntity.ok().body(result);
+		try {
+			List<Users> result = usersService.findAll();
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning Users objects!");
+		}
 	}
 	
 	@GetMapping(value = "/{id}")
 	public Users findById(@PathVariable Integer id) {
-		Users result = usersService.findById(id);
-		return result;
+		try {
+			Users result = usersService.findById(id);
+			return result;
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning user object!");
+		}
 	}
 	
 	@PostMapping(value = "/NewUser")

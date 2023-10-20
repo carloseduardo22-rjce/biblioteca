@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desenvolvedorCarlos.biblioteca.entities.Author;
 import com.desenvolvedorCarlos.biblioteca.service.AuthorService;
+import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 import com.desenvolvedorCarlos.biblioteca.util.CustomResponse;
 
 @RestController
@@ -28,14 +29,24 @@ public class AuthorController {
 	
 	@GetMapping
 	public ResponseEntity<List<Author>> findAll() {
-		List<Author> result = authorService.findAll();
-		return ResponseEntity.ok().body(result);
+		try {
+			List<Author> result = authorService.findAll();
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning authors objects!");
+		}
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Author> findById(@PathVariable Integer id) {
-		Author result = authorService.findById(id);
-		return ResponseEntity.ok().body(result);
+		try {
+			Author result = authorService.findById(id);
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error return author object!");
+		}
 	}
 	
 	@PostMapping(value = "/NewAuthor")

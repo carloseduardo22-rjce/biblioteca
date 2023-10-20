@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desenvolvedorCarlos.biblioteca.entities.CategoryBooks;
 import com.desenvolvedorCarlos.biblioteca.service.CategoryBooksService;
+import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 import com.desenvolvedorCarlos.biblioteca.util.CustomResponse;
 
 @RestController
@@ -28,14 +29,24 @@ public class CategoryBooksController {
 	
 	@GetMapping
 	public ResponseEntity<List<CategoryBooks>> findAll() {
-		List<CategoryBooks> result = categoryBooksService.findAll();
-		return ResponseEntity.ok().body(result);
+		try {
+			List<CategoryBooks> result = categoryBooksService.findAll();
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning CategoryBooks objects!");
+		}
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<CategoryBooks> findById (@PathVariable Integer id) {
-		CategoryBooks result = categoryBooksService.findById(id);
-		return ResponseEntity.ok().body(result);
+		try {
+			CategoryBooks result = categoryBooksService.findById(id);
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning CategoryBook object!");
+		}
 	}
 	
 	@PostMapping(value = "/NewCategoryBook")

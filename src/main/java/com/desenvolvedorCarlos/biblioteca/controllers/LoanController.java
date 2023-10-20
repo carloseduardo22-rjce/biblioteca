@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desenvolvedorCarlos.biblioteca.entities.Loan;
 import com.desenvolvedorCarlos.biblioteca.service.LoanService;
+import com.desenvolvedorCarlos.biblioteca.service.exception.ObjectNotFoundException;
 import com.desenvolvedorCarlos.biblioteca.util.CustomResponse;
 
 @RestController
@@ -28,14 +29,24 @@ public class LoanController {
 	
 	@GetMapping
 	public ResponseEntity<List<Loan>> findAll() {
-		List<Loan> result = loanService.findAll();
-		return ResponseEntity.ok().body(result);
+		try {
+			List<Loan> result = loanService.findAll();
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning Loans objects!");
+		}
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Loan> findById(@PathVariable Integer id) {
-		Loan result = loanService.findById(id);
-		return ResponseEntity.ok().body(result);
+		try {
+			Loan result = loanService.findById(id);
+			return ResponseEntity.ok().body(result);
+		}
+		catch (Exception e) {
+			throw new ObjectNotFoundException("Error returning Loan object!");
+		}
 	}
 	
 	@PostMapping(value = "/NewLoan")
